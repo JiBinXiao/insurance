@@ -17,13 +17,13 @@ public class UserDao {
 	
 
 
-	public boolean checkUser(User user) {
+	public User checkUser(User user) {
 		// TODO Auto-generated method stub
 		List<User> users= jdbcTemplate.query("select * from user where email=? and password=?",  new Object[]{user.getEmail(),user.getPassword()},new BeanPropertyRowMapper(User.class));
 		if(users.size()>0)
-			return true;
+			return users.get(0);
 		else
-			return false;
+			return null;
 	}
 
 

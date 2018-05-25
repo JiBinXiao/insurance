@@ -2,7 +2,10 @@ package com.cr.insurance.user.web;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,12 +21,16 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(User user) {
+	public String login(User user,HttpSession session) {
 		
-		boolean flag=userService.checkUser(user);
+		user=userService.checkUser(user);
 		
-		if(flag)
+		if(user!=null) {
+			
+			session.setAttribute("user", user);
 			return "redirect:/index";
+		}
+			
 		else
 			return "redirect:/user/gotologin";
 	}

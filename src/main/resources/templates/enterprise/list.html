@@ -19,106 +19,13 @@
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
-			<nav class="navbar navbar-default" role="navigation">
-				<div class="navbar-header">
-					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="/insurance/index">企业财产基本险</a>
-				</div>
-				
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li class="active">
-							 <a href="/insurance/index">首页</a>
-						</li>
-						<li>
-							 <a href="#">Link</a>
-						</li>
-						<li class="dropdown">
-							 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>
-							<ul class="dropdown-menu">
-								<li>
-									 <a href="#">Action</a>
-								</li>
-								<li>
-									 <a href="#">Another action</a>
-								</li>
-								<li>
-									 <a href="#">Something else here</a>
-								</li>
-								<li class="divider">
-								</li>
-								<li>
-									 <a href="#">Separated link</a>
-								</li>
-								<li class="divider">
-								</li>
-								<li>
-									 <a href="#">One more separated link</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-					<form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" />
-						</div> <button type="submit" class="btn btn-default">搜索</button>
-					</form>
-					<ul class="nav navbar-nav navbar-right">
-						<li>
-							 <a href="/insurance/user/gotologin">登录</a>
-						</li>
-						<li class="dropdown">
-							 <a href="#" class="dropdown-toggle" data-toggle="dropdown">个人管理<strong class="caret"></strong></a>
-							<ul class="dropdown-menu">
-								<li>
-									 <a href="#">个人中心</a>
-								</li>
-								<li>
-									 <a href="/insurance/enterprise/list">企业中心</a>
-								</li>
-								<li>
-									 <a href="#">保单中心</a>
-								</li>
-								<li class="divider">
-								</li>
-								<li>
-									 <a href="#">账单中心</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-				
-			</nav>
-<div class="row clearfix">
-				<div class="col-md-3 column">
-					<ul>
-						<li>
-							Lorem ipsum dolor sit amet
-						</li>
-						<li>
-							Consectetur adipiscing elit
-						</li>
-						<li>
-							Integer molestie lorem at massa
-						</li>
-						<li>
-							Facilisis in pretium nisl aliquet
-						</li>
-						<li>
-							Nulla volutpat aliquam velit
-						</li>
-						<li>
-							Faucibus porta lacus fringilla vel
-						</li>
-						<li>
-							Aenean sit amet erat nunc
-						</li>
-						<li>
-							Eget porttitor lorem
-						</li>
-					</ul>
-				</div>
-				<div class="col-md-9 column">
+			<nav th:include="template/head::copy" class="navbar navbar-default" role="navigation" ></nav>
+			<div class="row clearfix">
+				<h3 >
+				我的企业
+				</h3>
+				<a  class="btn btn-warning btn-sm m-l-md " href="/insurance/enterprise/gotoadd"><i class="fa fa-search"></i> 新增企业</a>
+				<div class="col-md-12 column">
 					<table class="table">
 						<thead>
 							<tr>
@@ -153,44 +60,18 @@
 								<td th:text="${enterprise.type}"></td>
 								<td th:text="${enterprise.address}"></td>
 								<td th:text="${enterprise.postalcode}"></td>
-								<td th:text="${enterprise.registeredCapital}"></td>
+								<td th:text="${enterprise.registeredCapital}+'万元'"></td>
 								<td>
-									<button type="button" class="btn btn-primary">查看详情</button>
-									<button type="button" class="btn btn-info">修改</button>
-									<button type="button" class="btn btn-danger" onclick=" windows.open='/insurance/enterprise/delete?id=0' ">删除</button>
+								 <a class="btn btn-sm  btn-success btn-outline m-l-sm " th:href="@{'/enterprise/gotodetail?id='+${enterprise.id}}"><i class="fa fa-refresh"></i> 查看详情</a>
+								 <a class="btn btn-sm btn-warning  m-l-sm " th:href="@{'/enterprise/gotoupdate?id='+${enterprise.id}}"><i class="fa fa-plus"></i> 修改</a>
+                				<a  class="btn btn-danger btn-sm m-l-md " th:href="@{'/enterprise/delete?id='+${enterprise.id}}" onclick="return confirm('确定删除吗？');"><i class="fa fa-search"></i> 删除</a>
+									
 								
 								 </td>
 								
 							</tr>
-							<tr class="success">
-								<td>
-									1
-								</td>
-								<td>
-									TB - Monthly
-								</td>
-								<td>
-									01/04/2012
-								</td>
-								<td>
-									Approved
-								</td>
-							</tr>
 							
-							<tr class="info">
-								<td>
-									4
-								</td>
-								<td>
-									TB - Monthly
-								</td>
-								<td>
-									04/04/2012
-								</td>
-								<td>
-									Call in to confirm
-								</td>
-							</tr>
+						
 						</tbody>
 					</table>
 				</div>

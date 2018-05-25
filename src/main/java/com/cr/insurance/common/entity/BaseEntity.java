@@ -1,6 +1,9 @@
 package com.cr.insurance.common.entity;
 
+import java.sql.Timestamp;
 import java.util.Date;
+
+import com.cr.insurance.user.entity.User;
 
 public class BaseEntity {
 	
@@ -8,11 +11,11 @@ public class BaseEntity {
 	
 	private String createby;
 	
-	private Date createdate;
+	private java.sql.Timestamp createdate;
 	
 	private String updateby;
 	
-	private Date updatedate;
+	private java.sql.Timestamp updatedate;
 	
 	private boolean isNewRecord = false;
 
@@ -32,14 +35,7 @@ public class BaseEntity {
 		this.createby = createby;
 	}
 
-	public Date getCreatedate() {
-		return createdate;
-	}
-
-	public void setCreatedate(Date createdate) {
-		this.createdate = createdate;
-	}
-
+	
 	public String getUpdateby() {
 		return updateby;
 	}
@@ -48,11 +44,21 @@ public class BaseEntity {
 		this.updateby = updateby;
 	}
 
-	public Date getUpdatedate() {
+
+
+	public java.sql.Timestamp getCreatedate() {
+		return createdate;
+	}
+
+	public void setCreatedate(java.sql.Timestamp createdate) {
+		this.createdate = createdate;
+	}
+
+	public java.sql.Timestamp getUpdatedate() {
 		return updatedate;
 	}
 
-	public void setUpdatedate(Date updatedate) {
+	public void setUpdatedate(java.sql.Timestamp updatedate) {
 		this.updatedate = updatedate;
 	}
 
@@ -64,13 +70,26 @@ public class BaseEntity {
 		this.isNewRecord = isNewRecord;
 	}
 	
+	public void preinsert(User user) {
+		if(isNewRecord) {
+			this.createby = user.getRealname();
+			this.updateby = user.getRealname();
+			this.createdate= new Timestamp(System.currentTimeMillis()); 
+			this.updatedate=new Timestamp(System.currentTimeMillis()); 
+		}else {
+			this.updateby = user.getRealname();
+			this.updatedate=new Timestamp(System.currentTimeMillis()); 
+		}
+	}
+	
 	public void preinsert() {
 		if(isNewRecord) {
-			this.createdate=new Date();
-			this.updatedate=new Date();
+		
+			this.createdate=new Timestamp(System.currentTimeMillis()); 
+			this.updatedate=new Timestamp(System.currentTimeMillis()); 
 		}else {
 			
-			this.updatedate=new Date();
+			this.updatedate=new Timestamp(System.currentTimeMillis()); 
 		}
 	}
 

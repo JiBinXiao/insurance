@@ -31,15 +31,15 @@ public class EnterpriseDao implements CrudDao<Enterprise> {
 	@Override
 	public int update(Enterprise entity) {
 		// TODO Auto-generated method stub
-		int res=jdbcTemplate.update("update enterprise set type=?,name=?,address=?,postalcode=?,registeredCapital=?,updateby=?,updatedate=?",entity.getId(),entity.getType(),entity.getName(),entity.getAddress(),entity.getPostalcode(),entity.getRegisteredCapital(),
-						entity.getUpdateby(),entity.getUpdatedate());
+		int res=jdbcTemplate.update("update enterprise set type=?,name=?,address=?,postalcode=?,registeredCapital=?,updateby=?,updatedate=? where id=?",entity.getType(),entity.getName(),entity.getAddress(),entity.getPostalcode(),entity.getRegisteredCapital(),
+						entity.getUpdateby(),entity.getUpdatedate(),entity.getId());
 		return res;
 	}
 
 	@Override
 	public Enterprise get(int id) {
 		// TODO Auto-generated method stub
-		List<Enterprise> enterprises= jdbcTemplate.query("select * from enterprise", new BeanPropertyRowMapper<Enterprise>(Enterprise.class));
+		List<Enterprise> enterprises= jdbcTemplate.query("select * from enterprise where id=?", new Object[] {id},new BeanPropertyRowMapper<Enterprise>(Enterprise.class));
 		if(enterprises!=null && enterprises.size()>0)
 			return enterprises.get(0);
 		else
@@ -49,7 +49,7 @@ public class EnterpriseDao implements CrudDao<Enterprise> {
 	@Override
 	public List<Enterprise> findAll() {
 		// TODO Auto-generated method stub
-		return jdbcTemplate.query("select * from enterprise",new BeanPropertyRowMapper<Enterprise>(Enterprise.class));
+		return jdbcTemplate.query("select * from enterprise where userId=?",new BeanPropertyRowMapper<Enterprise>(Enterprise.class));
 
 	}
 
@@ -58,6 +58,12 @@ public class EnterpriseDao implements CrudDao<Enterprise> {
 		// TODO Auto-generated method stub
 		int res=jdbcTemplate.update("delete from enterprise where id = ?",entity.getId());
 		return res;
+	}
+
+	public List<Enterprise> findAll(int userId) {
+		// TODO Auto-generated method stub
+		return jdbcTemplate.query("select * from enterprise where userId=?",new Object[] {userId},new BeanPropertyRowMapper<Enterprise>(Enterprise.class));
+
 	}
 
 }

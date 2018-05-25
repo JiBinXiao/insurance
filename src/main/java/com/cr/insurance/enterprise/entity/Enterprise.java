@@ -67,6 +67,12 @@ public class Enterprise extends BaseEntity {
 		this.userId = userId;
 	}
 
+	@Override
+	public String toString() {
+		return "Enterprise [type=" + type + ", name=" + name + ", address=" + address + ", postalcode=" + postalcode
+				+ ", registeredCapital=" + registeredCapital + ", userId=" + userId + "]";
+	}
+
 
 
 	
