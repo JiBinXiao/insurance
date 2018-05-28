@@ -8,27 +8,17 @@
  <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
 
 <link href="http://cdn.staticfile.org/twitter-bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet" />
-
+<link href="https://cdn.bootcss.com/jBox/0.4.9/jBox.css" rel="stylesheet" />
 
 <script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
 <script type="text/javascript" src="http://cdn.staticfile.org/jqueryui/1.10.2/jquery-ui.min.js"></script>
 <script type="text/javascript" src="http://cdn.staticfile.org/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>
 <script type="text/javascript" src="http://cdn.staticfile.org/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
-<script>
-$(document).ready(function(){
-    var flag = 1;
+<script src="https://cdn.bootcss.com/jBox/0.4.9/jBox.js"></script>
 
-    $(".js-password-control").click(function(event) {
-        if( flag === 1 ){
-            $(".form-control").attr("type","text");
-            flag = 0;
-        }else{
-            $(".js-password-btn").attr("type","password");
-            flag = 1;
-        }
-    });
-});
-</script>
+<style>
+
+</style>
 </head>
 <body>
 <div class="container">
@@ -51,7 +41,7 @@ $(document).ready(function(){
 					</p>
 				</div>
 				<div class="col-md-4 column">
-					<form action="login" method="post"  class="form-horizontal" role="form"    >
+					<form action="login" method="post" onSubmit="return check();"  class="form-horizontal" role="form"    >
 						<div class="form-group">
 							 <label for="inputEmail3" class="col-sm-2 control-label">邮箱</label>
 							<div class="col-sm-10">
@@ -76,7 +66,7 @@ $(document).ready(function(){
 						</div>
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
-								 <button type="submit" class="btn btn-primary">登录</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								 <button id="submit" class="btn btn-primary">登录</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								 <a href="gotoregister"  >注册 </a>
 								
 							</div>
@@ -90,6 +80,7 @@ $(document).ready(function(){
 	</div>
 
 </div>
+<div th:include="template/footer::footer"></div>
 </body>
 
 </html>

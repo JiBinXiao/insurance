@@ -1,5 +1,7 @@
 package com.cr.insurance.user.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +30,30 @@ public class UserService {
 	public void insert(User user) {
 		// TODO Auto-generated method stub
 		userDao.insert(user);
+	}
+
+	@Transactional( readOnly=false)
+	public void update(User user) {
+		// TODO Auto-generated method stub
+		userDao.update(user);
+	}
+
+
+	public User get(int userId) {
+		// TODO Auto-generated method stub
+		return userDao.get(userId);
+	}
+
+
+	public void updatepwd(User user) {
+		// TODO Auto-generated method stub
+		userDao.updatepwd(user);
+	}
+
+
+	public List<User> findAll() {
+		// TODO Auto-generated method stub
+		return userDao.findAll();
 	}
 	
 }

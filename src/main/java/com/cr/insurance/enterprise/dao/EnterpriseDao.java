@@ -49,7 +49,7 @@ public class EnterpriseDao implements CrudDao<Enterprise> {
 	@Override
 	public List<Enterprise> findAll() {
 		// TODO Auto-generated method stub
-		return jdbcTemplate.query("select * from enterprise where userId=?",new BeanPropertyRowMapper<Enterprise>(Enterprise.class));
+		return jdbcTemplate.query("select * from enterprise",new BeanPropertyRowMapper<Enterprise>(Enterprise.class));
 
 	}
 

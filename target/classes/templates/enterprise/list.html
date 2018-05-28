@@ -21,9 +21,15 @@
 		<div class="col-md-12 column">
 			<nav th:include="template/head::copy" class="navbar navbar-default" role="navigation" ></nav>
 			<div class="row clearfix">
-				<h3 >
-				我的企业
-				</h3>
+				<h3>
+                            <a href="javascript:history.go(-1);" class="m-l-sm btn btn-primary pull-right btn-sm" id="">
+                                <i class="fa fa-reply "></i> 返回
+                            </a>
+                          
+
+                            <i class="fa fa-slideshare"></i> 我的企业
+                        </h3>
+                        <hr></hr>
 				<a  class="btn btn-warning btn-sm m-l-md " href="/insurance/enterprise/gotoadd"><i class="fa fa-search"></i> 新增企业</a>
 				<div class="col-md-12 column">
 					<table class="table">
@@ -65,7 +71,7 @@
 								 <a class="btn btn-sm  btn-success btn-outline m-l-sm " th:href="@{'/enterprise/gotodetail?id='+${enterprise.id}}"><i class="fa fa-refresh"></i> 查看详情</a>
 								 <a class="btn btn-sm btn-warning  m-l-sm " th:href="@{'/enterprise/gotoupdate?id='+${enterprise.id}}"><i class="fa fa-plus"></i> 修改</a>
                 				<a  class="btn btn-danger btn-sm m-l-md " th:href="@{'/enterprise/delete?id='+${enterprise.id}}" onclick="return confirm('确定删除吗？');"><i class="fa fa-search"></i> 删除</a>
-									
+									<a  class="btn btn-warning btn-sm m-l-md " th:href="@{'/insuranceSlip/gotoadd?enterpriseId='+${enterprise.id}}"><i class="fa fa-search"></i> 新增投保单</a>
 								
 								 </td>
 								
@@ -81,5 +87,6 @@
 	</div>
 	
 </div>
+<div th:include="template/footer::footer"></div>
 </body>
 </html>
