@@ -1,0 +1,121 @@
+
+<html  xmlns:th="http://www.thymeleaf.org">
+ <head>
+ <title>企业财产险首页</title>
+ <meta charset="utf-8"></meta>
+ <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+<link href="http://cdn.staticfile.org/twitter-bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet" />
+
+
+<script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdn.staticfile.org/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://cdn.staticfile.org/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>
+<script type="text/javascript" src="http://cdn.staticfile.org/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
+
+</head>
+ <body>
+	<nav th:fragment="copy" class="navbar navbar-default" role="navigation"  >
+				<div class="navbar-header">
+					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="/insurance/index">企业财产基本险</a>
+				</div>
+				
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class="active">
+							 <a href="/insurance/index">首页</a>
+						</li>
+					
+					</ul>
+				
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+						     <a th:if="${session.user !=null}" th:text="'欢迎'+${session.user.realname}" ></a>
+							 <a th:if="${session.user ==null}" href="/insurance/user/gotologin">登录</a>
+						</li>
+						<li class="dropdown">
+							 <a href="#" class="dropdown-toggle" data-toggle="dropdown">个人管理<strong class="caret"></strong></a>
+							<ul class="dropdown-menu">
+								<li>
+									 <a href="/insurance/user/gotodetail">个人中心</a>
+								</li>
+								<li>
+									 <a href="/insurance/enterprise/list">企业中心</a>
+								</li>
+								<li>
+									 <a href="/insurance/insuranceSlip/list">投保单中心</a>
+								</li>
+								<li>
+									 <a href="#">账单中心</a>
+								</li>
+								<li th:if="${session.user != null}" class="divider">
+								</li>
+							
+									<li th:if="${session.user != null}">
+									
+									 <!-- 按钮触发模态框 -->
+										<a  data-toggle="modal" data-target="#myModal">修改密码</a>
+								
+									  <a  href="/insurance/user/quit" onclick="return confirm('确定退出吗？')" >退出登录</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+			<!-- 模态框（Modal） -->
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						    <div class="modal-dialog">
+						        <div class="modal-content">
+						            <div class="modal-header">
+						                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						                <h4 class="modal-title" id="myModalLabel">修改密码</h4>
+						            </div>
+						              <form action="/insurance/user/modifypwd" method="post" class="form-horizontal" role="form">
+						            <div class="modal-body">
+						         
+								
+											<div class="form-group">
+												 <label for="pwd" class="col-sm-4 control-label">请输入新密码</label>
+												<div class="col-sm-6">
+													<input name="newpwd" type="password" placeholder="请输入新密码" class="form-control" id="newpwd" />
+												</div>
+											</div>
+											<div class="form-group">
+												 <label for="newpwd2" class="col-sm-4 control-label">请再次输入新密码</label>
+												<div class="col-sm-6">
+													<input name="newpwd2" type="password" placeholder="请再次输入新密码" class="form-control" id="newpwd2" onkeyup="validate()" /><span id="tishi"></span>
+												</div>
+											</div>
+											
+						            </div>
+						            <div class="modal-footer">
+						                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						                <input type="submit" id="xiugai"   class="btn btn-default" onclick="validate()" value="修改" />
+						            </div>
+						            </form>
+						        </div><!-- /.modal-content -->
+						    </div><!-- /.modal-dialog -->
+						</div>
+			</div>
+				<script>
+				function validate() {
+				      
+				    var newpwd = $("#newpwd").val();
+				    var newpwd2 = $("#newpwd2").val();
+				<!-- 对比两次输入的密码 -->
+				    if(pwd == pwd1)
+				     {
+				        $("#tishi").html("两次密码相同");
+				         $("#tishi").css("color","green");
+				    	$("#xiugai").removeAttr("disabled");
+				     }
+				else {
+				        $("#tishi").html("两次密码不相同");
+				         $("#tishi").css("color","red")
+				          $("button").attr("disabled","disabled");  
+				      }
+				}
+				</script>
+			</nav>
+			
+			</body>
+			</html>

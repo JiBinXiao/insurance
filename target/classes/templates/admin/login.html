@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+ <title>企业财产险首页</title>
+ <meta charset="utf-8"></meta>
+ <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+<link href="http://cdn.staticfile.org/twitter-bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.bootcss.com/jBox/0.4.9/jBox.css" rel="stylesheet" />
+
+<script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdn.staticfile.org/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://cdn.staticfile.org/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>
+<script type="text/javascript" src="http://cdn.staticfile.org/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
+
+
+</head>
+<body><div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="row clearfix">
+				<div class="col-md-4 column">
+				</div>
+				<div class="col-md-4 column">
+					<h3>
+						后台管理
+					</h3>
+					<form action="/insurance/admin/login" method="post" role="form">
+						<div class="form-group">
+							 <label for="exampleInputEmail1">用户名</label><input name="username" type="text" class="form-control" id="exampleInputEmail1" />
+						</div>
+						<div class="form-group">
+							 <label for="exampleInputPassword1">密码</label><input name="password" type="password" class="form-control" id="exampleInputPassword1" />
+						</div>
+						<button type="submit" class="btn btn-default">登录</button>
+					</form>
+				</div>
+				<div class="col-md-4 column">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div th:include="template/footer::footer"></div>
+</body>
+</html>
