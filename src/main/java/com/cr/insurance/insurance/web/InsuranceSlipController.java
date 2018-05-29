@@ -85,7 +85,7 @@ public class InsuranceSlipController {
 		insuranceSlip=insuranceSlipService.findbySureName(insuranceSlip.getSurename());
 
 		//新增风险咨询表
-		String type=insuranceSlip.getIndustrycategory();
+		String type=insuranceSlip.getSuretype();
 		if("商业性企业".equals(type)) {
 			CommerialInquiry commerialInquiry=new CommerialInquiry();
 			commerialInquiry.setName(insuranceSlip.getSurename());

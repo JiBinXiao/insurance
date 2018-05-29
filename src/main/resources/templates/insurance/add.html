@@ -91,7 +91,7 @@
 						<div class="form-group">
 							 <label for="registeredCapital" class="col-sm-4 control-label">企业类型</label>
 							<div class="col-sm-8">
-								<input name="suretype" type="text" class="form-control"  th:value="${insuranceSlip.suretype}"  />
+								<input readonly="readonly" name="suretype" type="text" class="form-control"  th:value="${insuranceSlip.suretype}"  />
 							</div>
 						</div>
 					</div>
@@ -272,7 +272,8 @@
 			
 		</div>
         </div>
+      
     </div>
-<div th:include="template/footer::footer"></div>
+
 </body>
 </html>

@@ -27,7 +27,7 @@
                             </a>
                           
 
-                            <i class="fa fa-slideshare"></i> 所有企业
+                            <i class="fa fa-slideshare"></i> 所有投保单
                         </h3>
                         <hr></hr>
 				
@@ -39,44 +39,43 @@
 									编号
 								</th>
 								<th>
-									企业名称
+									投保企业名称
+								</th>
+								<th>
+									被投保人
 								</th>
 								<th>
 									企业类型
 								</th>
 								<th>
-									企业地址
-								</th>
-								<th>
-									企业邮编
+									所属客户
 								</th>
 							
 								<th>
-									企业注册资本
+									初审状态
 								</th>
-								<th>
-									所属用户
-								</th>
+								
 								<th>
 									操作
 								</th>
 							</tr>
 						</thead>
 						<tbody>
-						 <tr th:each="enterprise:${enterprises}">
+						 <tr th:each="insuranceSlip:${insuranceSlips}">
 						
-								<td th:text="${enterprise.id}"></td>
-								<td th:text="${enterprise.name}"></td>
-								<td th:text="${enterprise.type}"></td>
-								<td th:text="${enterprise.address}"></td>
-								<td th:text="${enterprise.postalcode}"></td>
-								<td th:text="${enterprise.registeredCapital}+'万元'"></td>
-								<td th:text="${enterprise.createby}"></td>
+								<td th:text="${insuranceSlip.id}"></td>
+								<td th:text="${insuranceSlip.surename}"></td>
+								<td th:text="${insuranceSlip.insuredname}"></td>
+								<td th:text="${insuranceSlip.suretype}"></td>
+								<td th:text="${insuranceSlip.createby}"></td>
+								<td th:text="${insuranceSlip.firsttrialstate}"></td>
+								
 							
 								<td>
-								 <a class="btn btn-sm  btn-success btn-outline m-l-sm " href="javascript:void(0)" th:onclick="'query2('+${enterprise.id}+')'"><i class="fa fa-refresh"></i> 查看详情</a>
+								 <a class="btn btn-sm  btn-success btn-outline m-l-sm " href="javascript:void(0)" th:onclick="'query('+${insuranceSlip.id}+')'"><i class="fa fa-refresh"></i> 查看详情</a>
 
-								<a  class="btn btn-warning btn-sm m-l-md queryA" href="javascript:void(0)" th:onclick="'query('+${enterprise.id}+')'">查看投保单</a>
+								<a  class="btn btn-warning btn-sm m-l-md queryA"  th:href="@{'/admin/insuranceSlip/modify?id='+${insuranceSlip.id}}" onclick="return confirm('确定审核通过吗？')">审核通过</a>
+								
 
 								 </td>
 								
@@ -93,7 +92,7 @@
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"
                                     aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="myModalLabel">企业详细信息</h4>
+                                <h4 class="modal-title" id="myModalLabel">投保单详细信息</h4>
                             </div>
                                 <div class="modal-body">
 
@@ -158,7 +157,7 @@
                             </div>
                                 <div class="modal-body">
                                    			
-				    <h4>投保人信息</h4>
+				  <h4>投保人信息</h4>
 				    <div class="row">
 				   
 				         <div class="input-group">
@@ -330,6 +329,7 @@
                            </div> 
 				    <br/>
 				    <br/>
+				
 				</div>
                                    
                         </div>
@@ -354,7 +354,6 @@
 <div th:include="template/footer::footer"></div>
 </body>
 <script type="text/javascript">
-//查看投保单详情
 function query(id) {
     
 
@@ -383,58 +382,20 @@ function showQuery(data) {
 
 	
     $("#surename").val(data.surename);
-    $("#sureorigin").val(data.sureorigin);
-    $("#surename").val(data.surename);
-    $("#sureperson").val(data.sureperson);
-    $("#surephone").val(data.surephone);
-    $("#surepostalcode").val(data.surepostalcode);
-    
-    $("#insuredname").val(data.insuredname);
-    $("#insuredpostaladdress").val(data.insuredpostaladdress);
-    $("#insuredorigin").val(data.insuredorigin);
-    $("#insuredperson").val(data.insuredperson);
-    $("#insuredphone").val(data.insuredphone);
-    $("#insuredpostalcode").val(data.insuredpostalcode);
-    $("#industrycategory").val(data.industrycategory);
-    $("#industrycode").val(data.industrycode);
-    $("#insurednum").val(data.insurednum);
-    $("#insuredaddress").val(data.insuredaddress);
-    $("#insuredregisteredcapital").val(data.insuredregisteredcapital);
-    $("#insuredtotalassets").val(data.insuredtotalassets);
-    $("#insuredoldturnover").val(data.insuredoldturnover);
-    $("#insuredtype").val(data.insuredtype);
-    $("#deductibleexcess").val(data.deductibleexcess);
-    $("#haverelevantinsurance").val(data.haverelevantinsurance);
-    $("#isnewinsurance").val(data.isnewinsurance);
-    $("#totalamountinsured").val(data.totalamountinsured);
-    $("#startdate").val(data.startdate);
-    $("#enddate").val(data.enddate);
-    $("#totalcost").val(data.totalcost);
-    $("#leadtime").val(data.leadtime);
-    $("#disputemethod").val(data.disputemethod);
-    $("#remark").val(data.remark);
-    
-    $("#firsttrialstate").val(data.firsttrialstate);
-    $("#firsttrialperson").val(data.firsttrialperson);
-    $("#firsttrialtime").val(data.firsttrialtime);
-    $("#safeguardsopinion").val(data.safeguardsopinion);
-    $("#safeguardsperson").val(data.safeguardsperson);
-    $("#safeguardstime").val(data.safeguardstime);
-
-    
+    $("#surepostaladdress").val(data.surepostaladdress);
+   
+  
     $('#queryInfo').modal('show');
 }
 
 
-
-//查看企业详情
 function query2(id) {
     
     
 	
     $.ajax({
     	
-        url : "/insurance/admin/enterprise/detail",
+        url : "/insurance/admin/insuranceSlip/detail",
         async : true,
         type : "POST",
        
@@ -454,7 +415,7 @@ function query2(id) {
 // 查询成功后向模态框插入数据并开启模态框。data是返回的JSON对象
 function showQueryB(data) {
 
-	
+	$("#id").val(data.id);
     $("#name").val(data.name);
     $("#address").val(data.address);
     $("#postalcode").val(data.postalcode);

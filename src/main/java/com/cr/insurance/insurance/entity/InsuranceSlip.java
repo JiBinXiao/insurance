@@ -73,7 +73,7 @@ public class InsuranceSlip extends BaseEntity{
 
     private String firsttrialperson;
 
-    private Date firsttrialtime;
+    private java.sql.Timestamp firsttrialtime;
 
     private String safeguardsopinion;
 
@@ -358,11 +358,13 @@ public class InsuranceSlip extends BaseEntity{
         return firsttrialtime;
     }
 
-    public void setFirsttrialtime(Date firsttrialtime) {
-        this.firsttrialtime = firsttrialtime;
-    }
+    
 
-    public String getSafeguardsopinion() {
+    public void setFirsttrialtime(java.sql.Timestamp firsttrialtime) {
+		this.firsttrialtime = firsttrialtime;
+	}
+
+	public String getSafeguardsopinion() {
         return safeguardsopinion;
     }
 

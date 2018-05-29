@@ -65,19 +65,19 @@
 						<tbody>
 						 <tr th:each="enterprise:${enterprises}">
 						
-								<td id="id" th:text="${enterprise.id}"></td>
+								<td th:text="${enterprise.id}"></td>
 								<td th:text="${enterprise.name}"></td>
 								<td th:text="${enterprise.type}"></td>
 								<td th:text="${enterprise.address}"></td>
 								<td th:text="${enterprise.postalcode}"></td>
-								<td th:text="${enterprise.registeredCapital}"></td>
+								<td th:text="${enterprise.registeredCapital}+'万元'"></td>
 								<td th:text="${enterprise.createby}"></td>
 							
 								<td>
-								 <a class="btn btn-sm  btn-success btn-outline m-l-sm " th:href="@{'/enterprise/gotodetail?id='+${enterprise.id}}"><i class="fa fa-refresh"></i> 查看详情</a>
+								 <a class="btn btn-sm  btn-success btn-outline m-l-sm " href="javascript:void(0)" th:onclick="'query2('+${enterprise.id}+')'"><i class="fa fa-refresh"></i> 查看详情</a>
 
-								<a  class="btn btn-warning btn-sm m-l-md queryA" href="javascript:void(0)" onclick="query()">查看投保单</a>
-								
+								<a  class="btn btn-warning btn-sm m-l-md queryA" href="javascript:void(0)" th:onclick="'query('+${enterprise.id}+')'">查看投保单</a>
+
 								 </td>
 								
 							</tr>
@@ -85,6 +85,66 @@
 						
 						</tbody>
 						</table>
+						        <div>
+                <div class="modal fade" id="queryInfoB" tabindex="-1" role="dialog"
+                    aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                    aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">企业详细信息</h4>
+                            </div>
+                                <div class="modal-body">
+
+				    <div class="row">
+				   
+				         <div class="input-group">
+                               <span class="input-group-addon">企业名称</span> <input
+                                   type="text" class="form-control" placeholder="企业名称"
+                                    id="name" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">企业地址</span> <input
+                                   type="text" class="form-control" placeholder="企业地址"
+                                    id="address" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">企业邮政编码</span> <input
+                                   type="text" class="form-control" placeholder="企业邮政编码"
+                                    id="postalcode" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">企业注册资金</span> <input
+                                   type="text" class="form-control" placeholder="企业注册资金"
+                                    id="registeredCapital" readonly="readonly" />
+                           </div>
+                              <div class="input-group">
+                               <span class="input-group-addon">企业类型</span> <input
+                                   type="text" class="form-control" placeholder="企业类型"
+                                    id="type" readonly="readonly" />
+                           </div>
+                              <div class="input-group">
+                               <span class="input-group-addon">企业所属用户</span> <input
+                                   type="text" class="form-control" placeholder="企业所属用户"
+                                    id="createby" readonly="readonly" />
+                           </div>
+			
+				
+				    <br/>
+				    <br/>
+				</div>
+                                   
+                        </div>
+                        </div>
+                        <!-- /.modal-content -->
+                        
+                    </div>
+                    
+                    <!-- /.modal -->
+                </div>
+                </div>
+						
 						<!-- 详细信息模态框（Modal） -->
             <div>
                 <div class="modal fade" id="queryInfo" tabindex="-1" role="dialog"
@@ -102,231 +162,172 @@
 				    <div class="row">
 				   
 				         <div class="input-group">
-                               <span class="input-group-addon">投保人名称</span> <input
-                                   type="text" class="form-control" placeholder="投保人名称"
+                               <span class="input-group-addon">投保人单位名称</span> <input
+                                   type="text" class="form-control" 
                                     id="surename" readonly="readonly" />
                            </div>
-				        <!--  
-				         <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>投保人邮编</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.surepostalcode == ''? '无':insuranceSlip.surepostalcode }"></h4>
-				        </div>
-				        
-				         <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>投保人组织机构代码</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.sureorigin == ''? '无':insuranceSlip.sureorigin }"></h4>
-				        </div>
-				        
-				  
-				        
-				          <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>投保人联系人</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.sureperson == ''? '无':insuranceSlip.sureperson }"></h4>
-				        </div>
-				        
-				          <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>投保人联系电话</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.surephone == ''? '无':insuranceSlip.surephone }"></h4>
-				        </div>
-				    </div>
-				    <br/>
-				    <h4>被投保人信息</h4>
-				      <div class="row">
+                            <div class="input-group">
+                               <span class="input-group-addon">投保人通讯地址</span> <input
+                                   type="text" class="form-control" 
+                                    id="surepostaladdress" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">投保人邮编</span> <input
+                                   type="text" class="form-control" 
+                                    id="surepostalcode" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">投保人组织机构代码</span> <input
+                                   type="text" class="form-control" 
+                                    id="sureorigin" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">投保联系人</span> <input
+                                   type="text" class="form-control" 
+                                    id="sureperson" readonly="readonly" />
+                           </div>
+                              <div class="input-group">
+                               <span class="input-group-addon">投保人联系电话</span> <input
+                                   type="text" class="form-control" 
+                                    id="surephone" readonly="readonly" />
+                           </div>
+                           
+                           
+				          <h4>被投保人信息</h4>
 				   
-				        <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>投保人单位名称</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				     	 <h4  th:text="${insuranceSlip.insuredname == ''? '无':insuranceSlip.insuredname }"></h4>
-				        </div>
-				        
-				         <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>投保人通讯地址</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				          <h4  th:text="${insuranceSlip.insuredpostaladdress == ''? '无':insuranceSlip.insuredpostaladdress }"></h4>
-				        </div>
-				        
-				         <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>投保人邮编</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.insuredpostalcode == ''? '无':insuranceSlip.insuredpostalcode }"></h4>
-				        </div>
-				        
-				         <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>投保人组织机构代码</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.insuredorigin== ''? '无':insuranceSlip.insuredorigin }"></h4>
-				        </div>
-				        
-				  
-				        
-				          <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>投保人联系人</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.insuredperson == ''? '无':insuranceSlip.insuredperson }"></h4>
-				        </div>
-				        
-				          <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>投保人联系电话</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.insuredphone == ''? '无':insuranceSlip.insuredphone }"></h4>
-				        </div>
-				    </div>
-				    <br/>
-				    
-				    <h4>保单基本信息</h4>
-				      <div class="row">
 				   
-				        <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>行业分类</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				     	 <h4  th:text="${insuranceSlip.industrycategory == ''? '无':insuranceSlip.industrycategory }"></h4>
-				        </div>
-				        
-				         <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>行业代码</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				          <h4  th:text="${insuranceSlip.industrycode == ''? '无':insuranceSlip.industrycode }"></h4>
-				        </div>
-				        
-				         <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>保险标的地址个数</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.insurednum == ''? '无':insuranceSlip.insurednum }"></h4>
-				        </div>
-				        
-				         <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>保险标的地址</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.insuredaddress== ''? '无':insuranceSlip.insuredaddress}"></h4>
-				        </div>
-				        
-				  
-				        
-				          <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>企业注册资本</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.insuredregisteredcapital == ''? '无':insuranceSlip.insuredregisteredcapital }"></h4>
-				        </div>
-				        
-				        <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>企业总资产</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.insuredtotalassets == ''? '无':insuranceSlip.insuredtotalassets }"></h4>
-				        </div>
-				        
-				        <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>上一年度实际营业额</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.insuredoldturnover == ''? '无':insuranceSlip.insuredoldturnover }"></h4>
-				        </div>
-				        
-				        
-				        <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>投保主险险种</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.insuredtype == ''? '无':insuranceSlip.insuredtype }"></h4>
-				        </div>
-				        
-				       <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>除另有约定本保险合同的每次事故免赔额为</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.deductibleexcess == '' ? '无':insuranceSlip.deductibleexcess }"></h4>
-				        </div>
-
-				        <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>是否有其他有关保险合同</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.haverelevantinsurance == ''? '无':insuranceSlip.haverelevantinsurance }"></h4>
-				        </div>
-				        
-				        <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>是否为续保合同</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.isnewinsurance== ''? '无':insuranceSlip.isnewinsurance }"></h4>
-				        </div>
-				        
-				       <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>总保险金额</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.totalamountinsured == ''? '无':insuranceSlip.totalamountinsured }"></h4>
-				        </div>
-				        
-				       <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>保险期间开始时间</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.startdate == null? '无':insuranceSlip.startdate}"></h4>
-				        </div>
-				        
-				 	   <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				  	       <h4>保险期间结束时间</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.enddate== null? '无':insuranceSlip.enddate }"></h4>
-				        </div>
-				        
-				         <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>总保险费</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.totalcost == ''? '无':insuranceSlip.totalcost }"></h4>
-				        </div>
-				        
-				        <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>保险费交付时间</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.leadtime == null? '无':insuranceSlip.leadtime }"></h4>
-				        </div>
-				        
-				         <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>保险合同争议解决方式</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.disputemethod == ''? '无':insuranceSlip.disputemethod }"></h4>
-				        </div>
-				        
-				       <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>特别约定</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.remark == ''? '无':insuranceSlip.remark }"></h4>
-				        </div>
-				        
-				    	 <div class="col-md-4" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         <h4>保险费交付时间</h4>
-				        </div>
-				        <div class="col-md-8" style=" box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
-				         	 <h4  th:text="${insuranceSlip.leadtime == null? '无':insuranceSlip.leadtime}"></h4>
-				        </div>
-				        -->
+				         <div class="input-group">
+                               <span class="input-group-addon">被投保人单位名称</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredname" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">被投保人通讯地址</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredpostaladdress" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">被投保人邮编</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredpostalcode" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">被投保人组织机构代码</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredorigin" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">被投保联系人</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredperson" readonly="readonly" />
+                           </div>
+                              <div class="input-group">
+                               <span class="input-group-addon">被投保人联系电话</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredphone" readonly="readonly" />
+                           </div>  
 				
+				
+				 <h4>保单基本信息</h4>
+				   
+				   
+				         <div class="input-group">
+                               <span class="input-group-addon">行业分类</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredname" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">行业代码</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredpostaladdress" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">保险标的地址个数</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredpostalcode" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">保险标的地址</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredorigin" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">企业注册资本</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredperson" readonly="readonly" />
+                           </div>
+                              <div class="input-group">
+                               <span class="input-group-addon">企业总资产</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredphone" readonly="readonly" />
+                           </div>  
+                           
+                                <div class="input-group">
+                               <span class="input-group-addon">上一年度实际营业额</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredname" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">投保主险险种</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredpostaladdress" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">除另有约定本保险合同的每次事故免赔额为</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredpostalcode" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">是否有其他有关保险合同</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredorigin" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">是否为续保合同</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredperson" readonly="readonly" />
+                           </div>
+                              <div class="input-group">
+                               <span class="input-group-addon">总保险金额</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredphone" readonly="readonly" />
+                           </div> 
+                           
+                                    <div class="input-group">
+                               <span class="input-group-addon">保险期间开始时间</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredname" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">保险期间结束时间</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredpostaladdress" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">总保险费</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredpostalcode" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">保险费交付时间</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredorigin" readonly="readonly" />
+                           </div>
+                            <div class="input-group">
+                               <span class="input-group-addon">保险合同争议解决方式</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredperson" readonly="readonly" />
+                           </div>
+                              <div class="input-group">
+                               <span class="input-group-addon">特别约定</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredphone" readonly="readonly" />
+                           </div> 
+                               <div class="input-group">
+                               <span class="input-group-addon">保险费交付时间</span> <input
+                                   type="text" class="form-control" 
+                                    id="insuredphone" readonly="readonly" />
+                           </div> 
 				    <br/>
 				    <br/>
 				</div>
@@ -353,9 +354,10 @@
 <div th:include="template/footer::footer"></div>
 </body>
 <script type="text/javascript">
-function query() {
+//查看投保单详情
+function query(id) {
     
-    id=$('#id').text();
+
 	
     $.ajax({
     	
@@ -364,14 +366,13 @@ function query() {
         type : "POST",
        
         data : {
-            
-            "id" : 4
+            "id" : id
         },
    
         // 成功后开启模态框
         success : showQuery,
         error : function() {
-            alert("请求失败");
+        	 alert("暂无此企业投保单信息");
         },
         dataType : "json"
     });
@@ -382,10 +383,88 @@ function showQuery(data) {
 
 	
     $("#surename").val(data.surename);
-    $("#surepostaladdress").val(data.surepostaladdress);
+    $("#sureorigin").val(data.sureorigin);
+    $("#surename").val(data.surename);
+    $("#sureperson").val(data.sureperson);
+    $("#surephone").val(data.surephone);
+    $("#surepostalcode").val(data.surepostalcode);
+    
+    $("#insuredname").val(data.insuredname);
+    $("#insuredpostaladdress").val(data.insuredpostaladdress);
+    $("#insuredorigin").val(data.insuredorigin);
+    $("#insuredperson").val(data.insuredperson);
+    $("#insuredphone").val(data.insuredphone);
+    $("#insuredpostalcode").val(data.insuredpostalcode);
+    $("#industrycategory").val(data.industrycategory);
+    $("#industrycode").val(data.industrycode);
+    $("#insurednum").val(data.insurednum);
+    $("#insuredaddress").val(data.insuredaddress);
+    $("#insuredregisteredcapital").val(data.insuredregisteredcapital);
+    $("#insuredtotalassets").val(data.insuredtotalassets);
+    $("#insuredoldturnover").val(data.insuredoldturnover);
+    $("#insuredtype").val(data.insuredtype);
+    $("#deductibleexcess").val(data.deductibleexcess);
+    $("#haverelevantinsurance").val(data.haverelevantinsurance);
+    $("#isnewinsurance").val(data.isnewinsurance);
+    $("#totalamountinsured").val(data.totalamountinsured);
+    $("#startdate").val(data.startdate);
+    $("#enddate").val(data.enddate);
+    $("#totalcost").val(data.totalcost);
+    $("#leadtime").val(data.leadtime);
+    $("#disputemethod").val(data.disputemethod);
+    $("#remark").val(data.remark);
+    
+    $("#firsttrialstate").val(data.firsttrialstate);
+    $("#firsttrialperson").val(data.firsttrialperson);
+    $("#firsttrialtime").val(data.firsttrialtime);
+    $("#safeguardsopinion").val(data.safeguardsopinion);
+    $("#safeguardsperson").val(data.safeguardsperson);
+    $("#safeguardstime").val(data.safeguardstime);
+
+    
+    $('#queryInfo').modal('show');
+}
+
+
+
+//查看企业详情
+function query2(id) {
+    
+    
+	
+    $.ajax({
+    	
+        url : "/insurance/admin/enterprise/detail",
+        async : true,
+        type : "POST",
+       
+        data : {
+            "id" : id
+        },
+   
+        // 成功后开启模态框
+        success : showQueryB,
+        error : function() {
+            alert("暂无此企业信息");
+        },
+        dataType : "json"
+    });
+}
+
+// 查询成功后向模态框插入数据并开启模态框。data是返回的JSON对象
+function showQueryB(data) {
+
+	
+    $("#name").val(data.name);
+    $("#address").val(data.address);
+    $("#postalcode").val(data.postalcode);
+    $("#registeredCapital").val(data.registeredCapital+'万元');
+    $("#type").val(data.type);
+    $("#createby").val(data.createby);
+    
    
   
-    $('#queryInfo').modal('show');
+    $('#queryInfoB').modal('show');
 }
 </script>
 </html>

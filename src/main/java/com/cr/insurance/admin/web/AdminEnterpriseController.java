@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cr.insurance.enterprise.entity.Enterprise;
 import com.cr.insurance.enterprise.service.EnterpeiseService;
@@ -22,5 +23,14 @@ public class AdminEnterpriseController {
 		List<Enterprise> enterprises=enterpeiseService.findAll();
 		model.addAttribute("enterprises", enterprises);
 		return "admin/enterpriselist";
+	}
+	
+	@RequestMapping(value = "detail")
+	@ResponseBody
+	public Enterprise detail(String id) {
+		Enterprise enterprise= enterpeiseService.get(Integer.parseInt(id));
+
+		return enterprise;
+		
 	}
 }

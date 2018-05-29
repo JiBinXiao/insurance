@@ -69,7 +69,7 @@ public class InsuranceSlipDao implements CrudDao<InsuranceSlip> {
 	public List<InsuranceSlip> findAll() {
 		// TODO Auto-generated method stub
 		
-		return null;
+		return jdbcTemplate.query("select * from insuranceslip", new BeanPropertyRowMapper<InsuranceSlip>(InsuranceSlip.class));
 	}
 
 	@Override
