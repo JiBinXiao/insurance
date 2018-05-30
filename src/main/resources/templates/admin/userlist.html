@@ -50,6 +50,9 @@
 								<th>
 									用户身份证号
 								</th>
+								<th>
+									创建时间
+								</th>
 							
 								<th>
 									操作
@@ -64,12 +67,9 @@
 								<td th:text="${user.phone}"></td>
 								<td th:text="${user.realname}"></td>
 								<td th:text="${user.idcard}"></td>
-							
+								<td th:text="${user.createdate}"></td>
 								<td>
 								 <a class="btn btn-sm  btn-success btn-outline m-l-sm " th:href="@{'/user/gotodetail?id='+${user.id}}"><i class="fa fa-refresh"></i> 查看详情</a>
-
-								
-								
 								 </td>
 								
 							</tr>

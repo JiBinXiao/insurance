@@ -95,4 +95,30 @@ public class InsuranceSlipDao implements CrudDao<InsuranceSlip> {
 			return null;
 	}
 
+	public void updateState(InsuranceSlip insuranceSlip) {
+		// TODO Auto-generated method stub
+		jdbcTemplate.update("update insuranceslip set firstTrialState=?,firstTrialPerson=?,firstTrialtime=? where id=?",insuranceSlip.getFirsttrialstate(),insuranceSlip.getFirsttrialperson(),insuranceSlip.getFirsttrialtime(),insuranceSlip.getId());
+	}
+
+	public List<InsuranceSlip> findPassAll() {
+		// TODO Auto-generated method stub
+		List<InsuranceSlip> insuranceSlips=jdbcTemplate.query("select * from insuranceslip order by firstTrialState", new BeanPropertyRowMapper<InsuranceSlip>(InsuranceSlip.class));
+		return insuranceSlips;
+	}
+
+	public List<InsuranceSlip> findAllDesc() {
+		// TODO Auto-generated method stub
+		return jdbcTemplate.query("select * from insuranceslip order by id desc", new BeanPropertyRowMapper<InsuranceSlip>(InsuranceSlip.class));
+	}
+
+	public List<InsuranceSlip> findAllbyTimeAsc() {
+		// TODO Auto-generated method stub
+		return jdbcTemplate.query("select * from insuranceslip order by createdate asc", new BeanPropertyRowMapper<InsuranceSlip>(InsuranceSlip.class));
+	}
+
+	public List<InsuranceSlip> findAllbyTimeDesc() {
+		// TODO Auto-generated method stub
+		return jdbcTemplate.query("select * from insuranceslip order by createdate desc", new BeanPropertyRowMapper<InsuranceSlip>(InsuranceSlip.class));
+	}
+
 }

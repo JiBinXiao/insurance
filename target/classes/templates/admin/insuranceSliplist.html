@@ -13,7 +13,16 @@
 <script type="text/javascript" src="http://cdn.staticfile.org/jqueryui/1.10.2/jquery-ui.min.js"></script>
 <script type="text/javascript" src="http://cdn.staticfile.org/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>
 <script type="text/javascript" src="http://cdn.staticfile.org/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
+<style>
+.red{
+	color:red;
+}
 
+default{
+	color:red;
+}
+
+</style>
 </head>
 <body>
 <div class="container">
@@ -21,15 +30,32 @@
 		<div class="col-md-12 column">
 			<nav th:include="admin/template/head::admincopy" class="navbar navbar-default" role="navigation" ></nav>
 			<div class="row clearfix">
-				<h3>
-                            <a href="javascript:history.go(-1);" class="m-l-sm btn btn-primary pull-right btn-sm" id="">
-                                <i class="fa fa-reply "></i> 返回
-                            </a>
-                          
-
-                            <i class="fa fa-slideshare"></i> 所有投保单
+			<h3>
+			 <i class="fa fa-slideshare pull-left"></i> 所有投保单           
+					<br/>
+                      <a href="javascript:history.go(-1);" class="m-l-sm btn btn-primary pull-right btn-sm" >
+                          <i class="fa fa-reply "></i> 返回
+                      </a>
+                      
+                      <a href="list?sortType=1" class="m-l-sm btn btn-link pull-center btn-sm" >
+                                <span th:class="${sortType == '1'}? 'red'" >按编号升序排序</span> 
+                        </a>   
+                      <a href="list?sortType=2" class="m-l-sm btn btn-link pull-center btn-sm" >
+                                 <span th:class="${sortType == '2'}? 'red'"> 按编号降序排序</span> 
+                        </a>  
+                      <a href="list?sortType=3" class="m-l-sm btn btn-link pull-center btn-sm" >
+                                 <span th:class="${sortType == '3'}? 'red'"> 按创建时间升序排序</span> 
+                        </a>  
+                      <a href="list?sortType=4" class="m-l-sm btn btn-link pull-center btn-sm" >
+                                 <span th:class="${sortType == '4'}? 'red'"> 按创建时间降序排序</span> 
+                        </a>  
+                      <a href="list?sortType=5" class="m-l-sm btn btn-link pull-center btn-sm" >
+                                <span th:class="${sortType == '5'}? 'red'"> 按审核状态排序</span> 
+                        </a>     
+					
+                 
                         </h3>
-                        <hr></hr>
+                  
 				
 				<div class="col-md-12 column">
 					<table class="table">
@@ -54,6 +80,12 @@
 								<th>
 									初审状态
 								</th>
+								<th>
+									创建时间
+								</th>
+								<th>
+									审核时间
+								</th>
 								
 								<th>
 									操作
@@ -69,12 +101,12 @@
 								<td th:text="${insuranceSlip.suretype}"></td>
 								<td th:text="${insuranceSlip.createby}"></td>
 								<td th:text="${insuranceSlip.firsttrialstate}"></td>
-								
-							
+								<td th:text="${insuranceSlip.createdate}"></td>
+							<td th:text="${insuranceSlip.firsttrialtime}"></td>
 								<td>
 								 <a class="btn btn-sm  btn-success btn-outline m-l-sm " href="javascript:void(0)" th:onclick="'query('+${insuranceSlip.id}+')'"><i class="fa fa-refresh"></i> 查看详情</a>
-
-								<a  class="btn btn-warning btn-sm m-l-md queryA"  th:href="@{'/admin/insuranceSlip/modify?id='+${insuranceSlip.id}}" onclick="return confirm('确定审核通过吗？')">审核通过</a>
+ 								<a class="btn btn-sm  btn-success btn-outline m-l-sm " href="javascript:void(0)" th:onclick="'queryInquiry('+${insuranceSlip.id}+')'"><i class="fa fa-refresh"></i> 查看风险问询表</a>
+						<span th:if="${insuranceSlip.firsttrialstate == '审核中'}" >			<a   class="btn btn-warning btn-sm m-l-md queryA"  th:href="@{'/admin/insuranceSlip/modify?id='+${insuranceSlip.id}}" onclick="return confirm('确定审核通过吗？')">审核通过</a></span>
 								
 
 								 </td>
@@ -381,35 +413,74 @@ function query(id) {
 function showQuery(data) {
 
 	
+
     $("#surename").val(data.surename);
-    $("#surepostaladdress").val(data.surepostaladdress);
-   
-  
+    $("#sureorigin").val(data.sureorigin);
+    $("#surename").val(data.surename);
+    $("#sureperson").val(data.sureperson);
+    $("#surephone").val(data.surephone);
+    $("#surepostalcode").val(data.surepostalcode);
+    
+    $("#insuredname").val(data.insuredname);
+    $("#insuredpostaladdress").val(data.insuredpostaladdress);
+    $("#insuredorigin").val(data.insuredorigin);
+    $("#insuredperson").val(data.insuredperson);
+    $("#insuredphone").val(data.insuredphone);
+    $("#insuredpostalcode").val(data.insuredpostalcode);
+    $("#industrycategory").val(data.industrycategory);
+    $("#industrycode").val(data.industrycode);
+    $("#insurednum").val(data.insurednum);
+    $("#insuredaddress").val(data.insuredaddress);
+    $("#insuredregisteredcapital").val(data.insuredregisteredcapital);
+    $("#insuredtotalassets").val(data.insuredtotalassets);
+    $("#insuredoldturnover").val(data.insuredoldturnover);
+    $("#insuredtype").val(data.insuredtype);
+    $("#deductibleexcess").val(data.deductibleexcess);
+    $("#haverelevantinsurance").val(data.haverelevantinsurance);
+    $("#isnewinsurance").val(data.isnewinsurance);
+    $("#totalamountinsured").val(data.totalamountinsured);
+    $("#startdate").val(data.startdate);
+    $("#enddate").val(data.enddate);
+    $("#totalcost").val(data.totalcost);
+    $("#leadtime").val(data.leadtime);
+    $("#disputemethod").val(data.disputemethod);
+    $("#remark").val(data.remark);
+    
+    $("#firsttrialstate").val(data.firsttrialstate);
+    $("#firsttrialperson").val(data.firsttrialperson);
+    $("#firsttrialtime").val(data.firsttrialtime);
+    $("#safeguardsopinion").val(data.safeguardsopinion);
+    $("#safeguardsperson").val(data.safeguardsperson);
+    $("#safeguardstime").val(data.safeguardstime);
+
+    
     $('#queryInfo').modal('show');
 }
 
 
-function query2(id) {
-    
-    
-	
-    $.ajax({
-    	
-        url : "/insurance/admin/insuranceSlip/detail",
-        async : true,
-        type : "POST",
-       
-        data : {
-            "id" : id
-        },
+function queryInquiry(id) {
    
-        // 成功后开启模态框
-        success : showQueryB,
-        error : function() {
-            alert("暂无此企业信息");
-        },
-        dataType : "json"
-    });
+
+   	 $.ajax({
+   	    	
+   	        url : "/insurance/admin/Inquiry/productldetial",
+   	        async : true,
+   	        type : "POST",
+   	       
+   	        data : {
+   	            "id" : id
+   	        },
+   	   
+   	        // 成功后开启模态框
+   	        success : showQueryB,
+   	        error : function() {
+   	            alert("暂无此投保单风险问询表信息");
+   	        },
+   	        dataType : "json"
+   	    });
+   
+
+   
 }
 
 // 查询成功后向模态框插入数据并开启模态框。data是返回的JSON对象

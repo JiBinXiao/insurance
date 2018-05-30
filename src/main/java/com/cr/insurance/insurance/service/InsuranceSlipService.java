@@ -61,4 +61,30 @@ public class InsuranceSlipService implements CrudService<InsuranceSlip> {
 		return insuranceSlipDao.findBySureName(surename);
 	}
 
+	@Transactional(readOnly=false)
+	public void updateState(InsuranceSlip insuranceSlip) {
+		// TODO Auto-generated method stub
+		insuranceSlipDao.updateState(insuranceSlip);
+	}
+
+	public List<InsuranceSlip> findPassAll() {
+		// TODO Auto-generated method stub
+		return insuranceSlipDao.findPassAll();
+	}
+
+	public List<InsuranceSlip> findAllDesc() {
+		// TODO Auto-generated method stub
+		return insuranceSlipDao.findAllDesc();
+	}
+
+	public List<InsuranceSlip> findAllbyTimeAsc() {
+		// TODO Auto-generated method stub
+		return insuranceSlipDao.findAllbyTimeAsc();
+	}
+
+	public List<InsuranceSlip> findAllbyTimeDesc() {
+		// TODO Auto-generated method stub
+		return insuranceSlipDao.findAllbyTimeDesc();
+	}
+
 }
