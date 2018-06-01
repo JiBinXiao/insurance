@@ -87,4 +87,10 @@ public class InsuranceSlipService implements CrudService<InsuranceSlip> {
 		return insuranceSlipDao.findAllbyTimeDesc();
 	}
 
+	@Transactional(readOnly = false)
+	public void updateOpinion(InsuranceSlip insuranceSlip) {
+		// TODO Auto-generated method stub
+		insuranceSlipDao.updateOpinion(insuranceSlip);
+	}
+
 }

@@ -77,35 +77,12 @@ public class InsuranceSlipController {
 			insuranceSlip.setNewRecord(true);
 			insuranceSlip.preinsert(user);
 			insuranceSlip.setEnterpriseid(1);
+			
 		}
 		
 		
 		insuranceSlipService.insert(insuranceSlip);
-		//通过投保人名称得到投保单
-		insuranceSlip=insuranceSlipService.findbySureName(insuranceSlip.getSurename());
 
-		//新增风险咨询表
-		String type=insuranceSlip.getSuretype();
-		if("商业性企业".equals(type)) {
-			CommerialInquiry commerialInquiry=new CommerialInquiry();
-			commerialInquiry.setName(insuranceSlip.getSurename());
-			commerialInquiry.setAddress(insuranceSlip.getSurepostaladdress());
-			commerialInquiry.setPostalcode(insuranceSlip.getSurepostalcode());
-			commerialInquiry.setInsuranceslipid(insuranceSlip.getId());
-		
-			commerialInquiryService.insertByInsuranceId(commerialInquiry);
-		}
-		
-		if("生产性企业".equals(type)) {
-			ProductiveInquiry productiveInquiry=new ProductiveInquiry();
-			productiveInquiry.setName(insuranceSlip.getSurename());
-			productiveInquiry.setAddress(insuranceSlip.getSurepostaladdress());
-			productiveInquiry.setPostalcode(insuranceSlip.getSurepostalcode());
-			productiveInquiry.setInsuranceslipid(insuranceSlip.getId());
-		
-			productiveInquiryService.insertByInsuranceId(productiveInquiry);
-		}
-		
 		return "redirect:/insuranceSlip/list";
 	}
 	

@@ -30,7 +30,7 @@ public class InsuranceSlipDao implements CrudDao<InsuranceSlip> {
 				"      isNewInsurance, totalAmountInsured, startdate," + 
 				"      enddate, totalCost, leadTime," + 
 				"      disputeMethod, remark, " + 
-				"      createby,createtime, updateby, updatetime," + 
+				"      createby,createdate, updateby, updatedate," + 
 				"      userId, enterpriseId)" + 
 				"    values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
 				,new Object[] {entity.getSurename(),entity.getSurepostaladdress(),
@@ -119,6 +119,12 @@ public class InsuranceSlipDao implements CrudDao<InsuranceSlip> {
 	public List<InsuranceSlip> findAllbyTimeDesc() {
 		// TODO Auto-generated method stub
 		return jdbcTemplate.query("select * from insuranceslip order by createdate desc", new BeanPropertyRowMapper<InsuranceSlip>(InsuranceSlip.class));
+	}
+
+	public void updateOpinion(InsuranceSlip insuranceSlip) {
+		// TODO Auto-generated method stub
+		jdbcTemplate.update("update insuranceslip set firstTrialState=?,firstTrialPerson=?,firstTrialOpinion=?,firstTrialtime=? where id=?",
+				insuranceSlip.getFirsttrialstate(),insuranceSlip.getFirsttrialperson(),insuranceSlip.getFirsttrialopinion(),insuranceSlip.getFirsttrialtime(),insuranceSlip.getId());
 	}
 
 }

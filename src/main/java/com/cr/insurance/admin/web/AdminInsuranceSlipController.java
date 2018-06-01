@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cr.insurance.admin.entity.AdminUser;
 import com.cr.insurance.insurance.entity.InsuranceSlip;
 import com.cr.insurance.insurance.service.InsuranceSlipService;
+import com.cr.insurance.user.entity.User;
 
 
 @Controller
@@ -31,6 +32,19 @@ public class AdminInsuranceSlipController {
 		InsuranceSlip insuranceSlip=insuranceSlipService.get(Integer.parseInt(id));
 		
 		return insuranceSlip;
+	}
+	
+	@RequestMapping(value = "updateState")
+	public String updateState(InsuranceSlip insuranceSlip,HttpSession hettpSession) {
+		AdminUser user=(AdminUser) hettpSession.getAttribute("adminUser");
+		if(user!=null) {
+			insuranceSlip.setFirsttrialstate("审核失败");
+			insuranceSlip.setFirsttrialperson(user.getUsername());
+			insuranceSlip.setFirsttrialtime(new Timestamp(System.currentTimeMillis()));
+			insuranceSlipService.updateOpinion(insuranceSlip);
+		}
+		
+		return "redirect:/admin/insuranceSlip/list"; 
 	}
 	
 	@RequestMapping(value = "list")

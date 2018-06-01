@@ -57,7 +57,7 @@
 									企业类型
 								</th>
 								<th>
-									初审状态
+									状态
 								</th>
 								<th>
 									操作
@@ -76,8 +76,7 @@
 								<td th:text="${insuranceSlip.firsttrialstate}"></td>
 								
 								<td>
-							<span th:if="${insuranceSlip.suretype == '生产性企业'}" >	 <a  class="btn btn-sm  btn-success btn-outline m-l-sm " th:href="@{'/productiveInquiry/gotoadd?insuranceId='+${insuranceSlip.id}}"><i class="fa fa-refresh"></i> 填写风险问询表</a></span>
-								<span th:if="${insuranceSlip.suretype == '商业性企业'}"> <a  class="btn btn-sm  btn-success btn-outline m-l-sm " th:href="@{'/commerialInquiry/gotoadd?insuranceId='+${insuranceSlip.id}}"><i class="fa fa-refresh"></i> 填写风险问询表</a></span>
+							
 								 <a class="btn btn-sm  btn-success btn-outline m-l-sm " th:href="@{'/insuranceSlip/gotodetail?id='+${insuranceSlip.id}}"><i class="fa fa-refresh"></i> 查看详情</a>
 								 <a class="btn btn-sm btn-warning  m-l-sm " th:href="@{'/insuranceSlip/gotoupdate?id='+${insuranceSlip.id}}"><i class="fa fa-plus"></i> 修改</a>
                 				<a  class="btn btn-danger btn-sm m-l-md " th:href="@{'/insuranceSlip/delete?id='+${insuranceSlip.id}}" onclick="return confirm('确定删除吗？');"><i class="fa fa-search"></i> 删除</a>

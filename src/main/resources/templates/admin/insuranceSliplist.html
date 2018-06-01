@@ -105,8 +105,11 @@ default{
 							<td th:text="${insuranceSlip.firsttrialtime}"></td>
 								<td>
 								 <a class="btn btn-sm  btn-success btn-outline m-l-sm " href="javascript:void(0)" th:onclick="'query('+${insuranceSlip.id}+')'"><i class="fa fa-refresh"></i> 查看详情</a>
- 								<a class="btn btn-sm  btn-success btn-outline m-l-sm " href="javascript:void(0)" th:onclick="'queryInquiry('+${insuranceSlip.id}+')'"><i class="fa fa-refresh"></i> 查看风险问询表</a>
-						<span th:if="${insuranceSlip.firsttrialstate == '审核中'}" >			<a   class="btn btn-warning btn-sm m-l-md queryA"  th:href="@{'/admin/insuranceSlip/modify?id='+${insuranceSlip.id}}" onclick="return confirm('确定审核通过吗？')">审核通过</a></span>
+	
+						<span th:if="${insuranceSlip.firsttrialstate == '审核中'}" >		
+							<a   class="btn btn-warning btn-sm m-l-md queryA"  th:href="@{'/admin/insuranceSlip/modify?id='+${insuranceSlip.id}}" onclick="return confirm('确定审核通过吗？')">审核通过</a> 
+							<a   class="btn btn-danger btn-sm m-l-md queryA"   th:onclick="'fail('+${insuranceSlip.id}+')'">审核失败</a>
+							</span>
 								
 
 								 </td>
@@ -116,7 +119,9 @@ default{
 						
 						</tbody>
 						</table>
-						        <div>
+			<!-- 审核失败模态框 -->
+			<div>
+						       
                 <div class="modal fade" id="queryInfoB" tabindex="-1" role="dialog"
                     aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -124,47 +129,19 @@ default{
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"
                                     aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="myModalLabel">投保单详细信息</h4>
+                                <h4 class="modal-title" id="myModalLabel">请填写投保单审核失败原因</h4>
                             </div>
                                 <div class="modal-body">
-
-				    <div class="row">
-				   
-				         <div class="input-group">
-                               <span class="input-group-addon">企业名称</span> <input
-                                   type="text" class="form-control" placeholder="企业名称"
-                                    id="name" readonly="readonly" />
-                           </div>
-                            <div class="input-group">
-                               <span class="input-group-addon">企业地址</span> <input
-                                   type="text" class="form-control" placeholder="企业地址"
-                                    id="address" readonly="readonly" />
-                           </div>
-                            <div class="input-group">
-                               <span class="input-group-addon">企业邮政编码</span> <input
-                                   type="text" class="form-control" placeholder="企业邮政编码"
-                                    id="postalcode" readonly="readonly" />
-                           </div>
-                            <div class="input-group">
-                               <span class="input-group-addon">企业注册资金</span> <input
-                                   type="text" class="form-control" placeholder="企业注册资金"
-                                    id="registeredCapital" readonly="readonly" />
-                           </div>
-                              <div class="input-group">
-                               <span class="input-group-addon">企业类型</span> <input
-                                   type="text" class="form-control" placeholder="企业类型"
-                                    id="type" readonly="readonly" />
-                           </div>
-                              <div class="input-group">
-                               <span class="input-group-addon">企业所属用户</span> <input
-                                   type="text" class="form-control" placeholder="企业所属用户"
-                                    id="createby" readonly="readonly" />
-                           </div>
-			
 				
-				    <br/>
-				    <br/>
-				</div>
+							<form method="post" action="updateState" role="form">
+							<input type="hidden" name="id" id="slid" />
+								  <div class="form-group">
+								   <label for="name">请输入审核失败原因</label>
+								   <textarea name="firsttrialopinion" class="form-control" rows="3"></textarea>
+								  </div>
+								  
+								  <button type="submit"  class="btn btn-primary">提交</button>
+							</form>
                                    
                         </div>
                         </div>
@@ -176,7 +153,7 @@ default{
                 </div>
                 </div>
 						
-						<!-- 详细信息模态框（Modal） -->
+						<!-- 投保单详情模态框（Modal） -->
             <div>
                 <div class="modal fade" id="queryInfo" tabindex="-1" role="dialog"
                     aria-labelledby="myModalLabel" aria-hidden="true">
@@ -386,6 +363,7 @@ default{
 <div th:include="template/footer::footer"></div>
 </body>
 <script type="text/javascript">
+//查看投保单
 function query(id) {
     
 
@@ -458,44 +436,18 @@ function showQuery(data) {
 }
 
 
-function queryInquiry(id) {
-   
+//填写失败理由
+function fail(id) {
+	showQueryB(id)
 
-   	 $.ajax({
-   	    	
-   	        url : "/insurance/admin/Inquiry/productldetial",
-   	        async : true,
-   	        type : "POST",
-   	       
-   	        data : {
-   	            "id" : id
-   	        },
-   	   
-   	        // 成功后开启模态框
-   	        success : showQueryB,
-   	        error : function() {
-   	            alert("暂无此投保单风险问询表信息");
-   	        },
-   	        dataType : "json"
-   	    });
-   
-
+   	 
    
 }
 
 // 查询成功后向模态框插入数据并开启模态框。data是返回的JSON对象
-function showQueryB(data) {
+function showQueryB(id) {
 
-	$("#id").val(data.id);
-    $("#name").val(data.name);
-    $("#address").val(data.address);
-    $("#postalcode").val(data.postalcode);
-    $("#registeredCapital").val(data.registeredCapital+'万元');
-    $("#type").val(data.type);
-    $("#createby").val(data.createby);
-    
-   
-  
+  $('#slid').val(id)
     $('#queryInfoB').modal('show');
 }
 </script>

@@ -72,15 +72,10 @@ public class InsuranceSlip extends BaseEntity{
     private String firsttrialstate;
 
     private String firsttrialperson;
+    
+    private String firsttrialopinion;
 
     private java.sql.Timestamp firsttrialtime;
-
-    private String safeguardsopinion;
-
-    private String safeguardsperson;
-
-    private Date safeguardstime;
-
 
 
     private Integer userid;
@@ -121,6 +116,7 @@ public class InsuranceSlip extends BaseEntity{
         this.sureperson = sureperson == null ? null : sureperson.trim();
     }
 
+    
     public String getSurephone() {
         return surephone;
     }
@@ -364,32 +360,17 @@ public class InsuranceSlip extends BaseEntity{
 		this.firsttrialtime = firsttrialtime;
 	}
 
-	public String getSafeguardsopinion() {
-        return safeguardsopinion;
-    }
+	
 
-    public void setSafeguardsopinion(String safeguardsopinion) {
-        this.safeguardsopinion = safeguardsopinion == null ? null : safeguardsopinion.trim();
-    }
+	public String getFirsttrialopinion() {
+		return firsttrialopinion;
+	}
 
-    public String getSafeguardsperson() {
-        return safeguardsperson;
-    }
+	public void setFirsttrialopinion(String firsttrialopinion) {
+		this.firsttrialopinion = firsttrialopinion;
+	}
 
-    public void setSafeguardsperson(String safeguardsperson) {
-        this.safeguardsperson = safeguardsperson == null ? null : safeguardsperson.trim();
-    }
-
-    public Date getSafeguardstime() {
-        return safeguardstime;
-    }
-
-    public void setSafeguardstime(Date safeguardstime) {
-        this.safeguardstime = safeguardstime;
-    }
-
-
-    public Integer getUserid() {
+	public Integer getUserid() {
         return userid;
     }
 
@@ -405,24 +386,6 @@ public class InsuranceSlip extends BaseEntity{
         this.enterpriseid = enterpriseid;
     }
 
-	@Override
-	public String toString() {
-		return "InsuranceSlip [surename=" + surename + ", surepostaladdress=" + surepostaladdress + ", sureorigin="
-				+ sureorigin + ", sureperson=" + sureperson + ", surephone=" + surephone + ", surepostalcode="
-				+ surepostalcode + ", insuredname=" + insuredname + ", insuredpostaladdress=" + insuredpostaladdress
-				+ ", insuredorigin=" + insuredorigin + ", insuredperson=" + insuredperson + ", insuredphone="
-				+ insuredphone + ", insuredpostalcode=" + insuredpostalcode + ", industrycategory=" + industrycategory
-				+ ", industrycode=" + industrycode + ", insurednum=" + insurednum + ", insuredaddress=" + insuredaddress
-				+ ", insuredregisteredcapital=" + insuredregisteredcapital + ", insuredtotalassets="
-				+ insuredtotalassets + ", insuredoldturnover=" + insuredoldturnover + ", insuredtype=" + insuredtype
-				+ ", deductibleexcess=" + deductibleexcess + ", haverelevantinsurance=" + haverelevantinsurance
-				+ ", isnewinsurance=" + isnewinsurance + ", totalamountinsured=" + totalamountinsured + ", startdate="
-				+ startdate + ", enddate=" + enddate + ", totalcost=" + totalcost + ", leadtime=" + leadtime
-				+ ", disputemethod=" + disputemethod + ", remark=" + remark + ", firsttrialstate=" + firsttrialstate
-				+ ", firsttrialperson=" + firsttrialperson + ", firsttrialtime=" + firsttrialtime
-				+ ", safeguardsopinion=" + safeguardsopinion + ", safeguardsperson=" + safeguardsperson
-				+ ", safeguardstime=" + safeguardstime + ", userid=" + userid + ", enterpriseid=" + enterpriseid + "]";
-	}
-    
+	
     
 }
