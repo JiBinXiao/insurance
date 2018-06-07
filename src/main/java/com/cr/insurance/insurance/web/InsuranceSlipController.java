@@ -11,14 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.cr.insurance.commerialInquiry.entity.CommerialInquiry;
-import com.cr.insurance.commerialInquiry.service.CommerialInquiryService;
 import com.cr.insurance.enterprise.entity.Enterprise;
 import com.cr.insurance.enterprise.service.EnterpeiseService;
 import com.cr.insurance.insurance.entity.InsuranceSlip;
 import com.cr.insurance.insurance.service.InsuranceSlipService;
-import com.cr.insurance.productiveInquiry.entity.ProductiveInquiry;
-import com.cr.insurance.productiveInquiry.service.ProductiveInquiryService;
+
 import com.cr.insurance.user.entity.User;
 import com.cr.insurance.user.service.UserService;
 
@@ -29,11 +26,7 @@ public class InsuranceSlipController {
 	@Autowired
 	private InsuranceSlipService  insuranceSlipService;
 	
-	@Autowired
-	private ProductiveInquiryService productiveInquiryService;
 	
-	@Autowired
-	private CommerialInquiryService commerialInquiryService;
 	
 	@Autowired
 	private EnterpeiseService enterpeiseService;
@@ -96,8 +89,7 @@ public class InsuranceSlipController {
 	@RequestMapping(value = "delete")
 	public String delete(InsuranceSlip insuranceSlip) {
 		
-		productiveInquiryService.deleteById(insuranceSlip.getId());
-		commerialInquiryService.deleteById(insuranceSlip.getId());
+		
 		insuranceSlipService.delete(insuranceSlip);
 		
 		return "redirect:/insuranceSlip/list";

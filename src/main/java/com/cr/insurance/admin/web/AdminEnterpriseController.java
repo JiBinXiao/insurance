@@ -33,4 +33,13 @@ public class AdminEnterpriseController {
 		return enterprise;
 		
 	}
+	
+	@RequestMapping(value = "findbyUser")
+	@ResponseBody
+	public List<Enterprise> findbyUser(String id) {
+		
+		List<Enterprise> enterprises=enterpeiseService.findAll(Integer.parseInt(id));
+		
+		return enterprises;
+	}
 }

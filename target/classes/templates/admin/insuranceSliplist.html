@@ -57,7 +57,7 @@ default{
                         </h3>
                   
 				
-				<div class="col-md-12 column">
+				<div class="col-md-14 column">
 					<table class="table">
 						<thead>
 							<tr>
@@ -77,15 +77,21 @@ default{
 									所属客户
 								</th>
 							
-								<th>
-									初审状态
-								</th>
+								
 								<th>
 									创建时间
 								</th>
 								<th>
+									状态
+								</th>
+								<th>
+									审核观点
+								</th>
+								
+								<th>
 									审核时间
 								</th>
+								
 								
 								<th>
 									操作
@@ -100,9 +106,11 @@ default{
 								<td th:text="${insuranceSlip.insuredname}"></td>
 								<td th:text="${insuranceSlip.suretype}"></td>
 								<td th:text="${insuranceSlip.createby}"></td>
-								<td th:text="${insuranceSlip.firsttrialstate}"></td>
+								
 								<td th:text="${insuranceSlip.createdate}"></td>
-							<td th:text="${insuranceSlip.firsttrialtime}"></td>
+								<td th:text="${insuranceSlip.firsttrialstate}"></td>
+								<td th:text="${insuranceSlip.firsttrialopinion}"></td>
+								<td th:text="${insuranceSlip.firsttrialtime}"></td>
 								<td>
 								 <a class="btn btn-sm  btn-success btn-outline m-l-sm " href="javascript:void(0)" th:onclick="'query('+${insuranceSlip.id}+')'"><i class="fa fa-refresh"></i> 查看详情</a>
 	

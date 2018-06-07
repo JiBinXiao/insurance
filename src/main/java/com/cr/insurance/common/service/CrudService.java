@@ -18,4 +18,6 @@ public interface CrudService<T> {
 	
 	//删除
 	int delete(T entity);
+	
+
 }

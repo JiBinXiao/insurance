@@ -77,6 +77,7 @@ public class InsuranceSlip extends BaseEntity{
 
     private java.sql.Timestamp firsttrialtime;
 
+    private String isread;
 
     private Integer userid;
 

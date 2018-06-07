@@ -18,15 +18,7 @@ public class EnterpriseDao implements CrudDao<Enterprise> {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	@Override
-	public int insert(Enterprise entity) {
-		// TODO Auto-generated method stub
-		int res=jdbcTemplate.update("insert enterprise(type,name,address,postalcode,registeredCapital,userId,createby,createdate,updateby,updatedate)"
-				+ " values(?,?,?,?,?,?,?,?,?,?)",entity.getType(),entity.getName(),entity.getAddress(),entity.getPostalcode(),entity.getRegisteredCapital(),entity.getUserId(),
-						entity.getCreateby(),entity.getCreatedate(),entity.getUpdateby(),entity.getUpdatedate());
-		return res;
-	
-	}
+
 
 	@Override
 	public int update(Enterprise entity) {
@@ -65,5 +57,14 @@ public class EnterpriseDao implements CrudDao<Enterprise> {
 		return jdbcTemplate.query("select * from enterprise where userId=?",new Object[] {userId},new BeanPropertyRowMapper<Enterprise>(Enterprise.class));
 
 	}
-
+	
+	@Override
+	public int insert(Enterprise entity) {
+		// TODO Auto-generated method stub
+		int res=jdbcTemplate.update("insert enterprise(type,name,address,postalcode,registeredCapital,userId,createby,createdate,updateby,updatedate)"
+				+ " values(?,?,?,?,?,?,?,?,?,?)",entity.getType(),entity.getName(),entity.getAddress(),entity.getPostalcode(),entity.getRegisteredCapital(),entity.getUserId(),
+						entity.getCreateby(),entity.getCreatedate(),entity.getUpdateby(),entity.getUpdatedate());
+		return res;
+	
+	}
 }

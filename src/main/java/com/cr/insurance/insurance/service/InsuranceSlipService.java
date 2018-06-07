@@ -93,4 +93,6 @@ public class InsuranceSlipService implements CrudService<InsuranceSlip> {
 		insuranceSlipDao.updateOpinion(insuranceSlip);
 	}
 
+
+
 }

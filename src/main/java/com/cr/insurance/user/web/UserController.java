@@ -26,7 +26,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(User user,HttpSession session) {
-		
+	
 		user=userService.checkUser(user);
 		
 		if(user!=null) {

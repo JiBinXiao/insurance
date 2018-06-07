@@ -22,7 +22,8 @@ public class UserService {
 
 	public User checkUser(User user) {
 		// TODO Auto-generated method stub
-		return userDao.checkUser(user);
+		user=userDao.checkUser(user);
+		return user;
 	}
 
 
@@ -44,7 +45,7 @@ public class UserService {
 		return userDao.get(userId);
 	}
 
-
+	@Transactional( readOnly=false)
 	public void updatepwd(User user) {
 		// TODO Auto-generated method stub
 		userDao.updatepwd(user);

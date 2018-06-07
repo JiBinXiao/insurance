@@ -53,10 +53,11 @@
 								<th>
 									创建时间
 								</th>
-							
+								<!--  
 								<th>
 									操作
 								</th>
+								-->
 							</tr>
 						</thead>
 						<tbody>
@@ -68,15 +69,89 @@
 								<td th:text="${user.realname}"></td>
 								<td th:text="${user.idcard}"></td>
 								<td th:text="${user.createdate}"></td>
+								<!--  
 								<td>
-								 <a class="btn btn-sm  btn-success btn-outline m-l-sm " th:href="@{'/user/gotodetail?id='+${user.id}}"><i class="fa fa-refresh"></i> 查看详情</a>
+								  <a class="btn btn-sm  btn-success btn-outline m-l-sm " href="javascript:void(0)" th:onclick="'query2('+${user.id}+')'"><i class="fa fa-refresh"></i> 查看拥有企业</a>
 								 </td>
-								
+								-->
 							</tr>
 							
 						
 						</tbody>
 					</table>
+					
+								        <div>
+                <div class="modal fade" id="queryInfoB" tabindex="-1" role="dialog"
+                    aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                    aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">所含企业</h4>
+                            </div>
+                                <div class="modal-body">
+
+				    <div class="row">
+				   	<table class="table">
+						<thead>
+							<tr>
+								<th>
+									编号
+								</th>
+								<th>
+									企业名称
+								</th>
+								<th>
+									企业类型
+								</th>
+								<th>
+									企业地址
+								</th>
+								<th>
+									企业邮编
+								</th>
+							
+								<th>
+									企业注册资本
+								</th>
+								<th>
+									所属用户
+								</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+						 <tr th:each="enterprise:${enterprises}">
+						
+								<td th:text="${enterprise.id}"></td>
+								<td th:text="${enterprise.name}"></td>
+								<td th:text="${enterprise.type}"></td>
+								<td th:text="${enterprise.address}"></td>
+								<td th:text="${enterprise.postalcode}"></td>
+								<td th:text="${enterprise.registeredCapital}+'万元'"></td>
+								<td th:text="${enterprise.createby}"></td>
+								
+							</tr>
+							
+						
+						</tbody>
+						</table>
+			
+				
+				    <br/>
+				    <br/>
+				</div>
+                                   
+                        </div>
+                        </div>
+                        <!-- /.modal-content -->
+                        
+                    </div>
+                    
+                    <!-- /.modal -->
+                </div>
+                </div>
 				</div>
 			
 			</div>
@@ -86,4 +161,48 @@
 </div>
 <div th:include="template/footer::footer"></div>
 </body>
+<script type="text/javascript">
+
+
+
+//查看企业详情
+function query2(id) {
+  
+  
+	
+  $.ajax({
+  	
+      url : "/insurance/admin/enterprise/findbyUser",
+      async : true,
+      type : "POST",
+     
+      data : {
+          "id" : id
+      },
+ 
+      // 成功后开启模态框
+      success : showQueryB,
+      error : function() {
+          alert("暂无此企业信息");
+      },
+      dataType : "json"
+  });
+}
+
+//查询成功后向模态框插入数据并开启模态框。data是返回的JSON对象
+function showQueryB(data) {
+	
+
+  $("#name").val(data.name);
+  $("#address").val(data.address);
+  $("#postalcode").val(data.postalcode);
+  $("#registeredCapital").val(data.registeredCapital+'万元');
+  $("#type").val(data.type);
+  $("#createby").val(data.createby);
+  
+ 
+
+  $('#queryInfoB').modal('show');
+}
+</script>
 </html>
