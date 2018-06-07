@@ -129,6 +129,7 @@
                                    type="text" class="form-control" placeholder="企业所属用户"
                                     id="createby" readonly="readonly" />
                            </div>
+                        
 			
 				
 				    <br/>
@@ -234,100 +235,96 @@
 				         <div class="input-group">
                                <span class="input-group-addon">行业分类</span> <input
                                    type="text" class="form-control" 
-                                    id="insuredname" readonly="readonly" />
+                                    id="industrycategory" readonly="readonly" />
                            </div>
                             <div class="input-group">
                                <span class="input-group-addon">行业代码</span> <input
                                    type="text" class="form-control" 
-                                    id="insuredpostaladdress" readonly="readonly" />
+                                    id="industrycode" readonly="readonly" />
                            </div>
                             <div class="input-group">
                                <span class="input-group-addon">保险标的地址个数</span> <input
                                    type="text" class="form-control" 
-                                    id="insuredpostalcode" readonly="readonly" />
+                                    id="insurednum" readonly="readonly" />
                            </div>
                             <div class="input-group">
                                <span class="input-group-addon">保险标的地址</span> <input
                                    type="text" class="form-control" 
-                                    id="insuredorigin" readonly="readonly" />
+                                    id="insuredaddress" readonly="readonly" />
                            </div>
                             <div class="input-group">
                                <span class="input-group-addon">企业注册资本</span> <input
                                    type="text" class="form-control" 
-                                    id="insuredperson" readonly="readonly" />
+                                    id="insuredregisteredcapital" readonly="readonly" />
                            </div>
                               <div class="input-group">
                                <span class="input-group-addon">企业总资产</span> <input
                                    type="text" class="form-control" 
-                                    id="insuredphone" readonly="readonly" />
+                                    id="insuredtotalassets" readonly="readonly" />
                            </div>  
                            
                                 <div class="input-group">
                                <span class="input-group-addon">上一年度实际营业额</span> <input
                                    type="text" class="form-control" 
-                                    id="insuredname" readonly="readonly" />
+                                    id="insuredoldturnover" readonly="readonly" />
                            </div>
                             <div class="input-group">
                                <span class="input-group-addon">投保主险险种</span> <input
                                    type="text" class="form-control" 
-                                    id="insuredpostaladdress" readonly="readonly" />
+                                    id="insuredtype" readonly="readonly" />
                            </div>
                             <div class="input-group">
                                <span class="input-group-addon">除另有约定本保险合同的每次事故免赔额为</span> <input
                                    type="text" class="form-control" 
-                                    id="insuredpostalcode" readonly="readonly" />
+                                    id="deductibleexcess" readonly="readonly" />
                            </div>
                             <div class="input-group">
                                <span class="input-group-addon">是否有其他有关保险合同</span> <input
                                    type="text" class="form-control" 
-                                    id="insuredorigin" readonly="readonly" />
+                                    id="haverelevantinsurance" readonly="readonly" />
                            </div>
                             <div class="input-group">
                                <span class="input-group-addon">是否为续保合同</span> <input
                                    type="text" class="form-control" 
-                                    id="insuredperson" readonly="readonly" />
+                                    id="isnewinsurance" readonly="readonly" />
                            </div>
                               <div class="input-group">
                                <span class="input-group-addon">总保险金额</span> <input
                                    type="text" class="form-control" 
-                                    id="insuredphone" readonly="readonly" />
+                                    id="totalamountinsured" readonly="readonly" />
                            </div> 
                            
                                     <div class="input-group">
                                <span class="input-group-addon">保险期间开始时间</span> <input
                                    type="text" class="form-control" 
-                                    id="insuredname" readonly="readonly" />
+                                    id="startdate" readonly="readonly" />
                            </div>
                             <div class="input-group">
                                <span class="input-group-addon">保险期间结束时间</span> <input
                                    type="text" class="form-control" 
-                                    id="insuredpostaladdress" readonly="readonly" />
+                                    id="enddate" readonly="readonly" />
                            </div>
                             <div class="input-group">
                                <span class="input-group-addon">总保险费</span> <input
                                    type="text" class="form-control" 
-                                    id="insuredpostalcode" readonly="readonly" />
+                                    id="totalcost" readonly="readonly" />
                            </div>
                             <div class="input-group">
                                <span class="input-group-addon">保险费交付时间</span> <input
                                    type="text" class="form-control" 
-                                    id="insuredorigin" readonly="readonly" />
+                                    id="leadtime" readonly="readonly" />
                            </div>
                             <div class="input-group">
                                <span class="input-group-addon">保险合同争议解决方式</span> <input
                                    type="text" class="form-control" 
-                                    id="insuredperson" readonly="readonly" />
+                                    id="disputemethod" readonly="readonly" />
                            </div>
                               <div class="input-group">
                                <span class="input-group-addon">特别约定</span> <input
                                    type="text" class="form-control" 
-                                    id="insuredphone" readonly="readonly" />
+                                    id="remark" readonly="readonly" />
                            </div> 
-                               <div class="input-group">
-                               <span class="input-group-addon">保险费交付时间</span> <input
-                                   type="text" class="form-control" 
-                                    id="insuredphone" readonly="readonly" />
-                           </div> 
+                        
 				    <br/>
 				    <br/>
 				</div>
@@ -461,7 +458,7 @@ function showQueryB(data) {
     $("#registeredCapital").val(data.registeredCapital+'万元');
     $("#type").val(data.type);
     $("#createby").val(data.createby);
-    
+
    
   
     $('#queryInfoB').modal('show');
