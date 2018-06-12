@@ -63,7 +63,7 @@ public class InsuranceSlip extends BaseEntity{
 
     private String totalcost;
 
-    private Date leadtime;
+    private java.sql.Timestamp leadtime;
 
     private String disputemethod;
 
@@ -311,15 +311,25 @@ public class InsuranceSlip extends BaseEntity{
         this.totalcost = totalcost == null ? null : totalcost.trim();
     }
 
-    public Date getLeadtime() {
-        return leadtime;
-    }
+ 
 
-    public void setLeadtime(Date leadtime) {
-        this.leadtime = leadtime;
-    }
+    public java.sql.Timestamp getLeadtime() {
+		return leadtime;
+	}
 
-    public String getDisputemethod() {
+	public void setLeadtime(java.sql.Timestamp leadtime) {
+		this.leadtime = leadtime;
+	}
+
+	public String getIsread() {
+		return isread;
+	}
+
+	public void setIsread(String isread) {
+		this.isread = isread;
+	}
+
+	public String getDisputemethod() {
         return disputemethod;
     }
 
